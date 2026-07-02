@@ -15,7 +15,7 @@ pipeline {
                                                  usernameVariable: 'QUAY_USER',  
                                                  passwordVariable: 'QUAY_PASS')]) {
                                                      
-                    sh 'echo $QUAY_PASS | docker login quay.test.com:8443 -u $QUAY_USER --password-stdin'
+                    sh 'echo $QUAY_PASS | docker login quay.test.com:8443 -u $QUAY_USER --password-stdin --tls-verify=false'
                     sh 'docker push quay.test.com:8443/init/odoo/odoo:v1 --tls-verify=false'
                 } // <--- FIXED: Closes the withCredentials block
             } // Closes the steps block
