@@ -9,6 +9,13 @@ pipeline {
         )
     }
     stages {
+        stages {
+
+        stage('Show Build Number') {
+            steps {
+                echo "Current build number is: ${env.BUILD_NUMBER}"
+            }
+        }
         stage('build') {
             steps {
                 sh """
@@ -30,3 +37,4 @@ pipeline {
         } // Closes the stage block
     } // Closes the stages block
 } // Closes the pipeline block
+
