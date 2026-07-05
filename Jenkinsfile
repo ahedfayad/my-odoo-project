@@ -9,7 +9,6 @@ pipeline {
         )
     }
     stages {
-        stages {
 
         stage('Show Build Number') {
             steps {
