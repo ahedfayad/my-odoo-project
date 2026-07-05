@@ -1,6 +1,6 @@
 pipeline {
     agent any
-
+    
 /*
      parameters {
         string(
@@ -10,7 +10,14 @@ pipeline {
         )
     }
 */
+
+
     stages {
+        stage('Show Git Commit') {
+            steps {
+                echo "Git Commit: ${env.GIT_COMMIT}"
+            }
+        }
 
         stage('Show Build Number') {
             steps {
@@ -38,4 +45,5 @@ pipeline {
         } // Closes the stage block
     } // Closes the stages block
 } // Closes the pipeline block
+
 
