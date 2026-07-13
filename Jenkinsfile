@@ -1,3 +1,5 @@
+#!/usr/bin/env groovy
+
 pipeline {
     agent any
 
@@ -61,16 +63,17 @@ pipeline {
                 }
             }
         }
-        post {
-            success {
-                echo "Image successfully pushed."
-            }
-            failure {
-                echo "Something failed."
-            }
-            always {
-                cleanWs()
-            }
+    }
+    post {
+        success {
+            echo "Image successfully pushed."
+        }
+    failure {
+        echo "Something failed."
+        }
+    always {
+        cleanWs()
         }
     }
+
 }
