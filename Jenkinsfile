@@ -61,5 +61,16 @@ pipeline {
                 }
             }
         }
+        post {
+            success {
+                echo "Image successfully pushed."
+            }
+            failure {
+                echo "Something failed."
+            }
+            always {
+                cleanWs()
+            }
+        }
     }
 }
