@@ -18,7 +18,7 @@ pipeline {
             }
         }
 
-        stage('Get Git Tag') {
+/*        stage('Get Git Tag') {
             steps {
                 script {
                     env.IMAGE_TAG = sh(
@@ -30,16 +30,16 @@ pipeline {
                 }
             }
         }
-
+*/
         stage('Build Image') {
             steps {
                 sh """
                     docker build \
-                        -t ${IMAGE_NAME}:${IMAGE_TAG} .
+                        -t ${IMAGE_NAME}:${env.BUILD_NUMBER} .
 
                     docker tag \
-                        ${IMAGE_NAME}:${IMAGE_TAG} \
-                        ${REGISTRY}/${REPOSITORY}/${IMAGE_NAME}:${IMAGE_TAG}
+                        ${IMAGE_NAME}:${env.BUILD_NUMBER} \
+                        ${REGISTRY}/${REPOSITORY}/${IMAGE_NAME}:${env.BUILD_NUMBER}
                 """
             }
         }
@@ -58,7 +58,7 @@ pipeline {
                         echo "\$QUAY_PASS" | docker login ${REGISTRY} \
                             -u "\$QUAY_USER" --password-stdin
 
-                        docker push ${REGISTRY}/${REPOSITORY}/${IMAGE_NAME}:${IMAGE_TAG}
+                        docker push ${REGISTRY}/${REPOSITORY}/${IMAGE_NAME}:${env.BUILD_NUMBER}
                     """
                 }
             }
